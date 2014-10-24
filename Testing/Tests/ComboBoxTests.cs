@@ -23,7 +23,6 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-using System;
 using NUnit.Framework;
 
 namespace Xwt
@@ -33,6 +32,19 @@ namespace Xwt
 		public override Widget CreateWidget ()
 		{
 			return new ComboBox ();
+		}
+
+		[Test]
+		public void InsertFirstItem ()
+		{
+			var comboBox = new ComboBox ();
+			comboBox.Items.Add ("One");
+			comboBox.Items.Add ("Two");
+
+			comboBox.Items.RemoveAt (0);
+			comboBox.Items.Insert (0, "Modified one");
+			Assert.That(comboBox.Items[0], Is.EqualTo("Modified one"));
+			Assert.That(comboBox.Items[1], Is.EqualTo("Two"));
 		}
 	}
 }
